@@ -7,6 +7,8 @@ import Loader from "./components/Loader.jsx";
 import Dashboard from "./components/Dashboard.jsx";
 import UserPage from "./pages/UserPage.jsx";
 import UserLayout from "./layout/UserLayout.jsx";
+import Home from "./components/Home.jsx";
+import LeadsTable from "./components/leads/LeadsTable.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,13 +16,17 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/user",
+    path: "/dashboard",
     element: <UserLayout />,
     children: [
-      { path: "dashboard", element: <Dashboard /> },
+      { path: "home", element: <Home />, index: true },
       {
         path: "users",
         element: <UserPage />,
+      },
+      {
+        path: "leads",
+        element: <LeadsTable />,
       },
     ],
   },
@@ -31,5 +37,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Suspense fallback={<Loader />}>
       <RouterProvider router={router} />
     </Suspense>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

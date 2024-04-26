@@ -1,4 +1,10 @@
+import UsersListTable from "../components/users/UsersListTable";
+
 const UserPage = () => {
-  return <div>UserPage</div>;
+  return (
+    <>
+      <UsersListTable />
+    </>
+  );
 };
 export default UserPage;

@@ -19,7 +19,7 @@ const UserLogin = () => {
       });
 
       localStorage.setItem("token", response.data.data.token);
-      navigate("/user/dashboard");
+      navigate("/dashboard/home");
     } catch (error) {
       setErrorMessage(error.response.data.message);
       console.log(error);
