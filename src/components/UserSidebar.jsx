@@ -11,7 +11,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
   const storedSidebarExpanded = localStorage.getItem("sidebar-expanded");
   const [sidebarExpanded, setSidebarExpanded] = useState(
-    storedSidebarExpanded === null ? false : storedSidebarExpanded === "true"
+    storedSidebarExpanded === null ? false : storedSidebarExpanded === "true",
   );
 
   // close on click outside
@@ -57,9 +57,9 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       }`}
     >
       {/* <!-- SIDEBAR HEADER --> */}
-      <div className="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+      <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
         <NavLink to="/">
-          {/* <img src={"/src/logo/logofullwhite.png"} alt="Logo" /> */}
+          <img src={"/PP Gx B2-1.png"} alt="Logo" className="w-40" />
         </NavLink>
 
         <button
@@ -88,7 +88,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="mt-5 py-4 px-4 lg:mt-9 lg:px-6">
+        <nav className="mt-5 px-4 py-4 lg:mt-9 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
@@ -99,28 +99,41 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {/* <!-- Menu Item Dashboard --> */}
               <li>
                 <NavLink
-                  to="dashboard"
+                  to="home"
                   className={({ isActive }) =>
-                    `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                       isActive && "bg-graydark dark:bg-meta-4"
                     }`
                   }
                 >
                   <MdOutlineDashboard />
-                  Dashboard
+                  Home
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="users"
                   className={({ isActive }) =>
-                    `group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                       isActive && "bg-graydark dark:bg-meta-4"
                     }`
                   }
                 >
                   <MdOutlineDashboard />
-                  users
+                  Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="leads"
+                  className={({ isActive }) =>
+                    `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      isActive && "bg-graydark dark:bg-meta-4"
+                    }`
+                  }
+                >
+                  <MdOutlineDashboard />
+                  Leads
                 </NavLink>
               </li>
               {/* <!-- Menu Item Dashboard --> */}
