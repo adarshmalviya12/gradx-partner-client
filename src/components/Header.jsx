@@ -51,7 +51,7 @@ const Header = ({ sidebarOpen, setSidebarOpen }) => {
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" to="/">
+          <Link className="block flex-shrink-0 lg:hidden" to="/dashboard">
             <img
               className="hidden w-30 dark:block"
               src="/PP Gx B2-1.png"
