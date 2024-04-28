@@ -1,38 +1,25 @@
 import { FaEdit, FaEye } from "react-icons/fa";
-import { useGetUsersQuery } from "../../features/api/apiSlice";
-import { useState } from "react";
-import Loader from "../Loader";
-import { Link } from "react-router-dom";
 
-const UsersListTable = () => {
-  const [usersList, setUsersList] = useState({});
-
-  let id = Math.floor(Math.random() * 100000);
-
-  const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (isError) return <p> something went wrong </p>;
-
+const CoursesListTable = () => {
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
-      <div className="flex justify-between px-1 py-1.5 md:px-1.5 xl:px-2.5">
+      <div className="px-1 py-1.5 md:px-1.5 xl:px-2.5">
         <h4 className="text-xl font-semibold text-black dark:text-white">
-          Users
+          Leads
         </h4>
       </div>
       <div className="max-w-full overflow-x-auto">
         <table className="w-full table-auto">
           <thead>
-            <tr className="bg-gray text-left text-sm dark:bg-meta-4 md:text-base">
+            <tr className="bg-gray   text-left text-sm dark:bg-meta-4 md:text-base">
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[220px] md:font-medium xl:pl-11">
-                User Name
+                Course Name
               </th>
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
-                Number
+                Description
+              </th>
+              <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
+                Status
               </th>
 
               <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
@@ -48,13 +35,16 @@ const UsersListTable = () => {
               <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                 <p className="text-black dark:text-white">9637626491</p>
               </td>
+              <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                <p className="text-black dark:text-white">not interested</p>
+              </td>
 
               <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                 <div className="flex items-center space-x-3.5">
                   <div className="flex justify-center gap-2">
-                    <Link to={`${id}`}>
+                    <button>
                       <FaEye />
-                    </Link>
+                    </button>
                     <button>
                       <FaEdit />
                     </button>
@@ -68,4 +58,4 @@ const UsersListTable = () => {
     </div>
   );
 };
-export default UsersListTable;
+export default CoursesListTable;
