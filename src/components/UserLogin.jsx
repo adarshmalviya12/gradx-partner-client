@@ -1,30 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import BASE_URL from "../constant";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../features/auth/authActions";
 
 const UserLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-
+  const { loading, error, userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(`${BASE_URL}/users/login`, {
-        email,
-        password,
-      });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-      localStorage.setItem("token", response.data.data.token);
-      navigate("/dashboard");
+  const handleFormSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+
+    try {
+      const loginData = { email, password };
+      await dispatch(userLogin(loginData)); // Dispatch login action
     } catch (error) {
-      setErrorMessage(error.response.data.message);
-      console.log(error);
+      console.error("Login error:", error); // Log error for debugging
     }
   };
+
+  useEffect(() => {
+    console.log(userInfo);
+    if (userInfo) {
+      navigate("/dashboard"); // Redirect to dashboard if user is already logged in
+    }
+  }, [navigate, userInfo]);
+
+  if (loading) return <div>Loading....</div>;
+  if (error) return <p> something went wrong</p>;
 
   return (
     <>
@@ -103,7 +109,7 @@ const UserLogin = () => {
           Forgot Password ?
         </p>
 
-        {!errorMessage ? (
+        {!error ? (
           <div></div>
         ) : (
           <div className="pb-2 pt-2 text-sm text-danger">{errorMessage}</div>

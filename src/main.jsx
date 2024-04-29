@@ -11,17 +11,16 @@ import {
 import Loader from "./components/Loader.jsx";
 import UserLayout from "./layout/UserLayout.jsx";
 import Home from "./components/Home.jsx";
-import LeadsTable from "./components/leads/LeadsTable.jsx";
-import { ApiProvider } from "@reduxjs/toolkit/query/react";
-import { apiSlice } from "./features/api/apiSlice.js";
 import LeadsPage from "./pages/LeadsPage.jsx";
 import CoursesPage from "./pages/CoursesPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import UserDetails from "./components/users/UserDetails.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
+import { Provider } from "react-redux";
+import store from "./app/store.js";
 
-const routers = createBrowserRouter(
+const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} />
@@ -38,34 +37,12 @@ const routers = createBrowserRouter(
   ),
 );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/dashboard",
-    element: <UserLayout />,
-    children: [
-      { path: "home", element: <Home />, index: true },
-      {
-        path: "users",
-        element: <UsersPage />,
-      },
-      {
-        path: "leads",
-        element: <LeadsTable />,
-      },
-    ],
-  },
-]);
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Suspense fallback={<Loader />}>
-      <ApiProvider api={apiSlice}>
-        <RouterProvider router={routers} />
-      </ApiProvider>
-    </Suspense>
+    <Provider store={store}>
+      <Suspense fallback={<Loader />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </Provider>
   </React.StrictMode>,
 );
