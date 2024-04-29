@@ -18,7 +18,8 @@ import SettingsPage from "./pages/SettingsPage.jsx";
 import UserDetails from "./components/users/UserDetails.jsx";
 import UsersPage from "./pages/UsersPage.jsx";
 import { Provider } from "react-redux";
-import store from "./app/store.js";
+import { persistor, store } from "./app/store.js";
+import { PersistGate } from "redux-persist/integration/react";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,9 +41,11 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Suspense fallback={<Loader />}>
-        <RouterProvider router={router} />
-      </Suspense>
+      <PersistGate loading={null} persistor={persistor}>
+        <Suspense fallback={<Loader />}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
 );

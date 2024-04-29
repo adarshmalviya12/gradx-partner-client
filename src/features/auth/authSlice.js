@@ -38,6 +38,7 @@ const authSlice = createSlice({
         state.userInfo = null;
         state.userToken = null;
         state.error = null;
+        localStorage.removeItem("persist:root");
         localStorage.removeItem("userToken"); // Remove token from local storage
       })
 
@@ -47,7 +48,6 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-        console.log(payload);
         state.loading = false;
         state.userInfo = payload.data;
       })
