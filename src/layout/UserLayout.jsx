@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import UserSidebar from "../components/UserSidebar";
 
 import Header from "../components/Header";
+import { useDispatch, useSelector } from "react-redux";
+import { getCurrentUser } from "../features/auth/authActions";
+import Loader from "../components/Loader";
 
 const UserLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
+  useEffect(() => {
+    dispatch(getCurrentUser());
+  }, [dispatch]);
+
+  if (loading) return <Loader />;
   return (
     <div className=" bg-meta-2 dark:bg-boxdark-2 dark:text-bodydark ">
       {/* <!-- ===== Page Wrapper Start ===== --> */}

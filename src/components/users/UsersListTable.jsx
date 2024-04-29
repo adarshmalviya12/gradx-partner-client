@@ -9,13 +9,13 @@ const UsersListTable = () => {
 
   let id = Math.floor(Math.random() * 100000);
 
-  const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
+  // const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  // if (isLoading) {
+  //   return <Loader />;
+  // }
 
-  if (isError) return <p> something went wrong </p>;
+  // if (isError) return <p> something went wrong </p>;
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
