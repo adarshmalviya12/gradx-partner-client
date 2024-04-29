@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../features/auth/authActions";
 
 const UserLogin = () => {
-  const { loading, error, userInfo } = useSelector((state) => state.auth);
+  const { isLoading, error, userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,13 +23,12 @@ const UserLogin = () => {
   };
 
   useEffect(() => {
-    console.log(userInfo);
     if (userInfo) {
       navigate("/dashboard"); // Redirect to dashboard if user is already logged in
     }
   }, [navigate, userInfo]);
 
-  if (loading) return <div>Loading....</div>;
+  if (isLoading) return <div>Loading....</div>;
   if (error) return <p> something went wrong</p>;
 
   return (

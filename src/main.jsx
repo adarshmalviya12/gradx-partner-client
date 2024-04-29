@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -20,19 +21,22 @@ import UsersPage from "./pages/UsersPage.jsx";
 import { Provider } from "react-redux";
 import { persistor, store } from "./app/store.js";
 import { PersistGate } from "redux-persist/integration/react";
+import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} />
-      <Route path="/dashboard" element={<UserLayout />}>
-        <Route index element={<Home />} />
-        <Route path="users" index element={<UsersPage />}></Route>
-        <Route path="users/:id" element={<UserDetails />} />
-        <Route path="leads" index element={<LeadsPage />} />
-        <Route path="courses" index element={<CoursesPage />} />
-        <Route path="profile" index element={<ProfilePage />} />
-        <Route path="settings" index element={<SettingsPage />} />
+      <Route path="/dashboard" element={<ProtectedRoutes />}>
+        <Route path="/dashboard" element={<UserLayout />}>
+          <Route index element={<Home />} />
+          <Route path="users" index element={<UsersPage />}></Route>
+          <Route path="users/:id" element={<UserDetails />} />
+          <Route path="leads" index element={<LeadsPage />} />
+          <Route path="courses" index element={<CoursesPage />} />
+          <Route path="profile" index element={<ProfilePage />} />
+          <Route path="settings" index element={<SettingsPage />} />
+        </Route>
       </Route>
     </>,
   ),

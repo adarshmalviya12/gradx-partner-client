@@ -35,7 +35,7 @@ export const userLogin = createAsyncThunk(
 
 export const getCurrentUser = createAsyncThunk(
   "users/current-user",
-  async (args, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("userToken") ?? "";
       const config = {
