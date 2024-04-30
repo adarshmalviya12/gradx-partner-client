@@ -6,7 +6,7 @@ const userToken = localStorage.getItem("userToken")
   : null;
 
 const initialState = {
-  loading: false,
+  isLoading: false,
   userInfo: null, // for user object
   userToken, // for storing the JWT
   error: null,
@@ -21,20 +21,20 @@ const authSlice = createSlice({
     // Login user
     builder
       .addCase(userLogin.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(userLogin.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.userInfo = payload.data.user;
         state.userToken = payload.data.token;
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.error = payload;
       })
       .addCase(userLogout, (state) => {
-        state.loading = false;
+        state.isLoading = false;
         state.userInfo = null;
         state.userToken = null;
         state.error = null;
@@ -44,15 +44,15 @@ const authSlice = createSlice({
 
       // current user
       .addCase(getCurrentUser.pending, (state) => {
-        state.loading = true;
+        state.isLoading = true;
         state.error = null;
       })
       .addCase(getCurrentUser.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.userInfo = payload.data;
       })
       .addCase(getCurrentUser.rejected, (state, { payload }) => {
-        state.loading = false;
+        state.isLoading = false;
         state.error = payload;
       });
   },

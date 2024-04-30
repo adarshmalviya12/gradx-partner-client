@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import UserSidebar from "../components/UserSidebar";
-
 import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../features/auth/authActions";
@@ -11,13 +10,15 @@ const UserLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { isLoading, error } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
 
-  if (loading) return <Loader />;
+  if (isLoading) return <Loader />;
+
+  if (error) return <div> something went wrong</div>;
   return (
     <div className=" bg-meta-2 dark:bg-boxdark-2 dark:text-bodydark ">
       {/* <!-- ===== Page Wrapper Start ===== --> */}

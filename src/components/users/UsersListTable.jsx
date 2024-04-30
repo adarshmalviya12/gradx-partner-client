@@ -1,21 +1,24 @@
 import { FaEdit, FaEye } from "react-icons/fa";
-import { useGetUsersQuery } from "../../features/api/apiSlice";
-import { useState } from "react";
+import { useEffect } from "react";
 import Loader from "../Loader";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../features/users/usersAction";
 
 const UsersListTable = () => {
-  const [usersList, setUsersList] = useState({});
+  const dispatch = useDispatch();
 
-  let id = Math.floor(Math.random() * 100000);
+  const { isLoading, usersList, error } = useSelector((state) => state.users);
 
-  // const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
 
-  // if (isLoading) {
-  //   return <Loader />;
-  // }
+  if (isLoading) {
+    return <Loader />;
+  }
 
-  // if (isError) return <p> something went wrong </p>;
+  if (error) return <p> something went wrong {error} </p>;
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
@@ -41,27 +44,32 @@ const UsersListTable = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            <tr>
-              <td className="border-b  border-t  border-stroke px-2 py-2.5 pl-3 dark:border-strokedark xl:pl-11">
-                <h5 className="font-medium text-black dark:text-white">name</h5>
-              </td>
-              <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                <p className="text-black dark:text-white">9637626491</p>
-              </td>
+            {usersList &&
+              usersList.map((user) => (
+                <tr key={user._id}>
+                  <td className="border-b  border-t  border-stroke px-2 py-2.5 pl-3 dark:border-strokedark xl:pl-11">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {user.firstname} {user.lastname}
+                    </h5>
+                  </td>
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <p className="text-black dark:text-white">{user.number}</p>
+                  </td>
 
-              <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                <div className="flex items-center space-x-3.5">
-                  <div className="flex justify-center gap-2">
-                    <Link to={`${id}`}>
-                      <FaEye />
-                    </Link>
-                    <button>
-                      <FaEdit />
-                    </button>
-                  </div>
-                </div>
-              </td>
-            </tr>
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <div className="flex items-center space-x-3.5">
+                      <div className="flex justify-center gap-2">
+                        <Link to={`${user._id}`}>
+                          <FaEye />
+                        </Link>
+                        <button>
+                          <FaEdit />
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
