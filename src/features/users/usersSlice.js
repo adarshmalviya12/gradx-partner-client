@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsers } from "./usersAction";
+import { createUser, getUsers } from "./usersAction";
 
 const initialState = {
   isLoading: false,
@@ -14,6 +14,7 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // get users
       .addCase(getUsers.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -23,6 +24,20 @@ const usersSlice = createSlice({
         state.usersList = payload.data.users;
       })
       .addCase(getUsers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      // create user
+      .addCase(createUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(createUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.usersList.push(payload.data.createdUser);
+      })
+      .addCase(createUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

@@ -4,7 +4,7 @@ import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 const backendURL = import.meta.env.VITE_BASE_URL;
 
 export const userLogin = createAsyncThunk(
-  "users/login",
+  "gradx/login",
   async ({ email, password }, { rejectWithValue }) => {
     try {
       // configure header's Content-Type as JSON
@@ -14,7 +14,7 @@ export const userLogin = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `${backendURL}/users/login`,
+        `${backendURL}/gradx/login`,
         { email, password },
         config,
       );
@@ -34,7 +34,7 @@ export const userLogin = createAsyncThunk(
 );
 
 export const getCurrentUser = createAsyncThunk(
-  "users/current-user",
+  "gradx/current-user",
   async (_, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("userToken") ?? "";
@@ -45,7 +45,7 @@ export const getCurrentUser = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `${backendURL}/users/current-user`,
+        `${backendURL}/gradx/current-user`,
         config,
       );
 

@@ -1,5 +1,5 @@
 import { FaEdit, FaEye } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loader from "../Loader";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import { getUsers } from "../../features/users/usersAction";
 
 const UsersListTable = () => {
   const dispatch = useDispatch();
-  let id = Math.floor(Math.random() * 100000);
+
   const { isLoading, usersList, error } = useSelector((state) => state.users);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const UsersListTable = () => {
     return <Loader />;
   }
 
-  if (error) return <p> something went wrong </p>;
+  if (error) return <p> something went wrong {error} </p>;
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
