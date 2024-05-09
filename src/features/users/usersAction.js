@@ -38,12 +38,65 @@ export const createUser = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      const response = await axios.post(
+      const { data } = await axios.post(
         `${backendURL}/gradx/create-user`,
         formData,
         config,
       );
-      const { data } = response;
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);
+
+export const updateUser = createAsyncThunk(
+  "gradx/update-user",
+  async ({ id, formData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken") ?? "";
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.patch(
+        `${backendURL}/gradx/user/${id}`,
+        formData,
+        config,
+      );
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);
+
+export const deleteUser = createAsyncThunk(
+  "gradx/user",
+  async (id, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken") ?? "";
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.delete(
+        `${backendURL}/gradx/user/${id}`,
+        config,
+      );
+
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

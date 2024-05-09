@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createUser, getUsers } from "./usersAction";
+import { createUser, deleteUser, getUsers, updateUser } from "./usersAction";
 
 const initialState = {
   isLoading: false,
@@ -38,6 +38,39 @@ const usersSlice = createSlice({
         state.usersList.push(payload.data.createdUser);
       })
       .addCase(createUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      //update user
+
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(updateUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+      })
+      .addCase(updateUser.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      // delete user
+
+      .addCase(deleteUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteUser.fulfilled, (state, { payload }) => {
+        console.log("delete payload", payload.data.deletedUser._id);
+        const deletedUserId = payload.data.deletedUser._id;
+        state.isLoading = false;
+        state.usersList = state.usersList.filter(
+          (user) => user._id !== deletedUserId,
+        );
+      })
+      .addCase(deleteUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

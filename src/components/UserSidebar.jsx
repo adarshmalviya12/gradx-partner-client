@@ -3,9 +3,6 @@ import { NavLink, useLocation } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
 
 const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
-  const location = useLocation();
-  const { pathname } = location;
-
   const trigger = useRef(null);
   const sidebar = useRef(null);
 

@@ -1,14 +1,19 @@
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useEffect } from "react";
 import Loader from "../Loader";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../features/users/usersAction";
+import { deleteUser, getUsers } from "../../features/users/usersAction";
+import ConfirmationDialog from "../ConfirmationDialog";
 
 const UsersListTable = () => {
   const dispatch = useDispatch();
 
   const { isLoading, usersList, error } = useSelector((state) => state.users);
+
+  const handleDelete = (id) => {
+    dispatch(deleteUser(id));
+  };
 
   useEffect(() => {
     dispatch(getUsers());
@@ -18,7 +23,10 @@ const UsersListTable = () => {
     return <Loader />;
   }
 
-  if (error) return <p> something went wrong {error} </p>;
+  if (error) {
+    console.log(error);
+  }
+  if (error) return <p> {error} </p>;
 
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
@@ -36,6 +44,9 @@ const UsersListTable = () => {
               </th>
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
                 Number
+              </th>
+              <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
+                Role
               </th>
 
               <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
@@ -55,6 +66,9 @@ const UsersListTable = () => {
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                     <p className="text-black dark:text-white">{user.number}</p>
                   </td>
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <p className="text-black dark:text-white">{user.role}</p>
+                  </td>
 
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                     <div className="flex items-center space-x-3.5">
@@ -62,9 +76,12 @@ const UsersListTable = () => {
                         <Link to={`${user._id}`}>
                           <FaEye />
                         </Link>
-                        <button>
-                          <FaEdit />
-                        </button>
+                        <span>
+                          <ConfirmationDialog
+                            title={"Are you sure want to delete"}
+                            onConfirm={() => handleDelete(user._id)}
+                          />
+                        </span>
                       </div>
                     </div>
                   </td>
