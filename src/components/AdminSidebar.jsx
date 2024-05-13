@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
 
-const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
@@ -96,7 +96,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {/* <!-- Menu Item Dashboard --> */}
               <li>
                 <NavLink
-                  to="/employee"
+                  to="/admin"
                   className={
                     ({ isActive }) =>
                       `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ` //
@@ -107,6 +107,33 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 >
                   <MdOutlineDashboard />
                   Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="users"
+                  className={({ isActive }) =>
+                    `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      isActive && "bg-graydark dark:bg-meta-4"
+                    }`
+                  }
+                >
+                  <MdOutlineDashboard />
+                  Users
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  to="courses"
+                  className={({ isActive }) =>
+                    `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      isActive && "bg-graydark dark:bg-meta-4"
+                    }`
+                  }
+                >
+                  <MdOutlineDashboard />
+                  Courses
                 </NavLink>
               </li>
               <li>
@@ -122,6 +149,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   Leads
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
                   to="profile"
@@ -157,5 +185,4 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     </aside>
   );
 };
-
-export default UserSidebar;
+export default AdminSidebar;

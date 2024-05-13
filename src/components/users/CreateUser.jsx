@@ -31,6 +31,7 @@ const CreateUser = () => {
       password: "",
       confirmPassword: "",
       role: "",
+      dob: "",
     });
   };
 
@@ -111,6 +112,8 @@ const CreateUser = () => {
               <input
                 type="tel"
                 placeholder="Number"
+                maxLength={10}
+                minLength={10}
                 className="w-full rounded border-[1.5px] border-stroke bg-transparent px-2 py-1 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 name="number"
                 value={formData.number}
@@ -140,6 +143,19 @@ const CreateUser = () => {
           </div>
 
           <div className="mb-1.5 flex flex-col gap-6 xl:flex-row">
+            <div className="w-full xl:w-1/3">
+              <label className="mb-1.5 block text-black dark:text-white">
+                Date of Birth <span className="text-meta-1">*</span>
+              </label>
+              <input
+                type="date"
+                name="dob"
+                value={formData.dob}
+                onChange={handleChange}
+                placeholder="Enter your date of birth"
+                className="w-full rounded border-[1.5px] border-stroke bg-transparent px-2 py-1 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+              />
+            </div>
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
                 Roles<span className="text-meta-1">*</span>
@@ -177,6 +193,9 @@ const CreateUser = () => {
                 onChange={handleChange}
               />
             </div>
+          </div>
+
+          <div className="mb-1.5 flex flex-col gap-6 xl:flex-row">
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
                 Confirm Password <span className="text-meta-1">*</span>
@@ -191,8 +210,9 @@ const CreateUser = () => {
                 onChange={handleChange}
               />
             </div>
+            <div className="w-full xl:w-1/3"></div>
+            <div className="w-full xl:w-1/3"></div>
           </div>
-
           <div className="flex justify-end">
             <button
               type="submit"

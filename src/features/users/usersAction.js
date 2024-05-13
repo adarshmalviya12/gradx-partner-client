@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const backendURL = import.meta.env.VITE_BASE_URL;
 
@@ -15,6 +16,7 @@ export const getUsers = createAsyncThunk(
         },
       };
       const { data } = await axios.get(`${backendURL}/gradx/users`, config);
+
       return data;
     } catch (error) {
       // return custom error message from API if any
@@ -43,11 +45,14 @@ export const createUser = createAsyncThunk(
         formData,
         config,
       );
+      if (data.message) toast.success(data.message);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
         return rejectWithValue(error.response.data.message);
       } else {
+        console.error(error.message);
         return rejectWithValue(error.message);
       }
     }
@@ -70,11 +75,14 @@ export const updateUser = createAsyncThunk(
         formData,
         config,
       );
+      if (data.message) toast.success(data.message);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
         return rejectWithValue(error.response.data.message);
       } else {
+        console.error(error.message);
         return rejectWithValue(error.message);
       }
     }
@@ -97,6 +105,7 @@ export const deleteUser = createAsyncThunk(
         config,
       );
 
+      if (data.message) toast.success(data.message);
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {

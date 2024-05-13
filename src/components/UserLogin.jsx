@@ -23,13 +23,19 @@ const UserLogin = () => {
   };
 
   useEffect(() => {
-    if (userInfo) {
-      navigate("/dashboard"); // Redirect to dashboard if user is already logged in
+    if (userInfo?.role === "admin") {
+      navigate("/admin"); // Redirect to dashboard if user is already logged in
+    }
+
+    if (userInfo?.role === "employee") {
+      navigate("/employee");
+    }
+    if (userInfo?.role === "partner") {
+      navigate("/partner");
     }
   }, [navigate, userInfo]);
 
   if (isLoading) return <div>Loading....</div>;
-  if (error) return <p> something went wrong</p>;
 
   return (
     <>
@@ -107,12 +113,6 @@ const UserLogin = () => {
         >
           Forgot Password ?
         </p>
-
-        {!error ? (
-          <div></div>
-        ) : (
-          <div className="pb-2 pt-2 text-sm text-danger">{errorMessage}</div>
-        )}
 
         <div className="mb-5">
           <input

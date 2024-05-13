@@ -4,6 +4,7 @@ import Loader from "../Loader";
 import BASE_URL, { convertDob } from "../../constant";
 import axios from "axios"; // Import axios for making API requests
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const UserDetails = () => {
   const [editUser, setEditUser] = useState(false);
@@ -44,6 +45,7 @@ const UserDetails = () => {
         },
       );
       setUserDetails(data.data.updatedUser);
+      toast.success(data.message);
       setIsLoading(false);
       setEditUser(false);
     } catch (error) {

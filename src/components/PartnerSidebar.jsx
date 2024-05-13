@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
 
-const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
+const PartnerSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const trigger = useRef(null);
   const sidebar = useRef(null);
 
@@ -96,7 +96,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               {/* <!-- Menu Item Dashboard --> */}
               <li>
                 <NavLink
-                  to="/employee"
+                  to="/partner"
                   className={
                     ({ isActive }) =>
                       `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ` //
@@ -158,4 +158,4 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   );
 };
 
-export default UserSidebar;
+export default PartnerSidebar;
