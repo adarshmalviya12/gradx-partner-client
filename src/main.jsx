@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import {
-  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -21,22 +20,61 @@ import UsersPage from "./pages/UsersPage.jsx";
 import { Provider } from "react-redux";
 import { persistor, store } from "./app/store.js";
 import { PersistGate } from "redux-persist/integration/react";
-import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
+import AdminLayout from "./layout/AdminLayout.jsx";
+import PartnerLayout from "./layout/PartnerLayout.jsx";
+import ProtectedRoutes from "../src/components/ProtectedRoutes.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CourseDetails from "./components/courses/CourseDetails.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} />
-      <Route path="/dashboard" element={<ProtectedRoutes />}>
-        <Route path="/dashboard" element={<UserLayout />}>
-          <Route index element={<Home />} />
-          <Route path="users" index element={<UsersPage />}></Route>
-          <Route path="users/:id" element={<UserDetails />} />
-          <Route path="leads" index element={<LeadsPage />} />
-          <Route path="courses" index element={<CoursesPage />} />
-          <Route path="profile" index element={<ProfilePage />} />
-          <Route path="settings" index element={<SettingsPage />} />
-        </Route>
+      // admin routes
+      <Route
+        path="/admin"
+        element={
+          <ProtectedRoutes role={"admin"}>
+            <AdminLayout />
+          </ProtectedRoutes>
+        }
+      >
+        <Route path="users" element={<UsersPage />} />
+        <Route path="users/:id" element={<UserDetails />} />
+        <Route path="courses" element={<CoursesPage />} />
+        <Route path="courses/:id" element={<CourseDetails />} />
+        <Route path="leads" element={<LeadsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+      // employee
+      <Route
+        path="/employee"
+        element={
+          <ProtectedRoutes role={"employee"}>
+            <UserLayout />
+          </ProtectedRoutes>
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="leads" element={<LeadsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="settings" element={<SettingsPage />} />
+      </Route>
+      // Partner
+      <Route
+        path="/partner"
+        element={
+          <ProtectedRoutes role={"partner"}>
+            <PartnerLayout />
+          </ProtectedRoutes>
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="leads" element={<LeadsPage />} />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="settings" element={<SettingsPage />} />
       </Route>
     </>,
   ),
@@ -47,6 +85,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Suspense fallback={<Loader />}>
+          <ToastContainer />
           <RouterProvider router={router} />
         </Suspense>
       </PersistGate>
