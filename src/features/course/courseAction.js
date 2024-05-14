@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 const backendURL = import.meta.env.VITE_BASE_URL;
 const token = localStorage.getItem("userToken") ?? "";
 
-export const getUsers = createAsyncThunk(
-  "gradx/users",
+export const getCourses = createAsyncThunk(
+  "gradx/courses",
   async (_, { rejectWithValue }) => {
     try {
       const config = {
@@ -15,11 +15,10 @@ export const getUsers = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.get(`${backendURL}/gradx/users`, config);
+      const { data } = await axios.get(`${backendURL}/gradx/courses`, config);
 
       return data;
     } catch (error) {
-      // return custom error message from API if any
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
@@ -29,8 +28,8 @@ export const getUsers = createAsyncThunk(
   },
 );
 
-export const createUser = createAsyncThunk(
-  "gradx/create-user",
+export const createCourse = createAsyncThunk(
+  "gradx/create-course",
   async (formData, { rejectWithValue }) => {
     try {
       const config = {
@@ -40,7 +39,7 @@ export const createUser = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `${backendURL}/gradx/create-user`,
+        `${backendURL}/gradx/create-course`,
         formData,
         config,
       );
@@ -48,47 +47,16 @@ export const createUser = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response && error.response.data.message) {
-        toast.error(error.response.data.message);
         return rejectWithValue(error.response.data.message);
       } else {
-        console.error(error.message);
         return rejectWithValue(error.message);
       }
     }
   },
 );
 
-export const updateUser = createAsyncThunk(
-  "gradx/update-user",
-  async ({ id, formData }, { rejectWithValue }) => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await axios.patch(
-        `${backendURL}/gradx/user/${id}`,
-        formData,
-        config,
-      );
-      if (data.message) toast.success(data.message);
-      return data;
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        toast.error(error.response.data.message);
-        return rejectWithValue(error.response.data.message);
-      } else {
-        console.error(error.message);
-        return rejectWithValue(error.message);
-      }
-    }
-  },
-);
-
-export const deleteUser = createAsyncThunk(
-  "gradx/user",
+export const deleteCourse = createAsyncThunk(
+  "gradx/course",
   async (id, { rejectWithValue }) => {
     try {
       const config = {
@@ -98,7 +66,7 @@ export const deleteUser = createAsyncThunk(
         },
       };
       const { data } = await axios.delete(
-        `${backendURL}/gradx/user/${id}`,
+        `${backendURL}/gradx/course/${id}`,
         config,
       );
 

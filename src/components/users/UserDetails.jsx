@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import Loader from "../Loader";
 import BASE_URL, { convertDob } from "../../constant";
-import axios from "axios"; // Import axios for making API requests
+import axios from "axios";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 

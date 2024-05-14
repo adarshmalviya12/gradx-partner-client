@@ -43,7 +43,6 @@ const usersSlice = createSlice({
       })
 
       //update user
-
       .addCase(updateUser.pending, (state) => {
         state.isLoading = true;
         state.error = null;
@@ -63,7 +62,6 @@ const usersSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteUser.fulfilled, (state, { payload }) => {
-        console.log("delete payload", payload.data.deletedUser._id);
         const deletedUserId = payload.data.deletedUser._id;
         state.isLoading = false;
         state.usersList = state.usersList.filter(

@@ -25,6 +25,7 @@ import PartnerLayout from "./layout/PartnerLayout.jsx";
 import ProtectedRoutes from "../src/components/ProtectedRoutes.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CourseDetails from "./components/courses/CourseDetails.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
         <Route path="users" element={<UsersPage />} />
         <Route path="users/:id" element={<UserDetails />} />
         <Route path="courses" element={<CoursesPage />} />
+        <Route path="courses/:id" element={<CourseDetails />} />
         <Route path="leads" element={<LeadsPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
