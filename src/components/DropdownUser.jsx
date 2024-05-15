@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../features/auth/authActions";
 // import UserOne from "../images/user/user-01.png";
 
@@ -8,8 +8,11 @@ const DropdownUser = () => {
   const { loading, error, userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
+
   const handleLogout = () => {
     dispatch(userLogout());
+    navigate("/");
   };
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -143,10 +146,7 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <Link
-          to="/"
-          className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
-        >
+        <div className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
           <button
             onClick={handleLogout}
             className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
@@ -170,7 +170,7 @@ const DropdownUser = () => {
             </svg>
             Log Out
           </button>
-        </Link>
+        </div>
       </div>
       {/* <!-- Dropdown End --> */}
     </div>

@@ -11,16 +11,16 @@ const CreateCourse = () => {
     duration: "",
   });
 
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createCourse(formData));
     setFormData({ name: "", details: "", duration: "" });
-    console.log(formData);
   };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
   return (
     <div className="mb-5 rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
       <div className="border-b border-stroke px-3.5 py-2 dark:border-strokedark">

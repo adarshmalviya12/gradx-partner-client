@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import BASE_URL from "../../constant";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Loader from "../Loader";
 
 const CourseDetails = () => {
   const [editCourse, setEditCourse] = useState(false);
@@ -78,6 +79,13 @@ const CourseDetails = () => {
 
     fetchCourseDetails();
   }, []);
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (isLoading) return <Loader />;
+
   return (
     <>
       {!editCourse ? (
@@ -100,7 +108,7 @@ const CourseDetails = () => {
               </p>
               <p>
                 <span className="font-semibold">Duration : </span>{" "}
-                {courseDetails.duration}
+                {courseDetails.duration ? courseDetails.duration : 0} Months
               </p>
             </div>
           )}

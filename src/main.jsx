@@ -26,6 +26,7 @@ import ProtectedRoutes from "../src/components/ProtectedRoutes.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CourseDetails from "./components/courses/CourseDetails.jsx";
+import LeadDetails from "./components/leads/LeadDetails.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -45,6 +46,7 @@ const router = createBrowserRouter(
         <Route path="courses" element={<CoursesPage />} />
         <Route path="courses/:id" element={<CourseDetails />} />
         <Route path="leads" element={<LeadsPage />} />
+        <Route path="leads/:id" element={<LeadDetails />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
@@ -59,6 +61,7 @@ const router = createBrowserRouter(
       >
         <Route index element={<Home />} />
         <Route path="leads" element={<LeadsPage />} />
+        <Route path="leads/:id" element={<LeadDetails />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
@@ -73,6 +76,7 @@ const router = createBrowserRouter(
       >
         <Route index element={<Home />} />
         <Route path="leads" element={<LeadsPage />} />
+        <Route path="leads/:id" element={<LeadDetails />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
@@ -85,7 +89,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Suspense fallback={<Loader />}>
-          <ToastContainer />
+          <ToastContainer transition:Slide autoClose={1000} />
           <RouterProvider router={router} />
         </Suspense>
       </PersistGate>
