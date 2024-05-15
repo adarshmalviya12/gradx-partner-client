@@ -7,7 +7,7 @@ const ProtectedRoutes = ({ role, children }) => {
   const userRole = userInfo.role;
 
   if (!userRole || userRole !== role) {
-    return <Navigate to="/" replace />; // Redirect to login if not authorized
+    return <Navigate to="/" replace />;
   }
 
   return children ? children : <Outlet />;

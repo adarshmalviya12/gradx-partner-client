@@ -39,7 +39,7 @@ const authSlice = createSlice({
         state.userToken = null;
         state.error = null;
         localStorage.removeItem("persist:root");
-        localStorage.removeItem("userToken"); // Remove token from local storage
+        localStorage.removeItem("userToken");
       })
 
       // current user

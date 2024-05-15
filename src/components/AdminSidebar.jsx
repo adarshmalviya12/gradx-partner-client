@@ -55,7 +55,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
-        <NavLink to="/dashboard">
+        <NavLink to="/">
           <img src={"/PP Gx B2-1.png"} alt="Logo" className="w-40" />
         </NavLink>
 

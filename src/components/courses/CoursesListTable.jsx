@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCourse, getCourses } from "../../features/course/courseAction";
 import Loader from "../Loader";
@@ -23,9 +23,6 @@ const CoursesListTable = () => {
     return <Loader />;
   }
 
-  if (error) {
-    console.log(error);
-  }
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
       <div className="px-1 py-1.5 md:px-1.5 xl:px-2.5">
@@ -67,7 +64,7 @@ const CoursesListTable = () => {
                     </p>
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                    <p className="text-black dark:text-white">
+                    <p className="pl-4 text-black dark:text-white">
                       {course.duration}
                     </p>
                   </td>

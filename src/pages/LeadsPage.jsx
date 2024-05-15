@@ -3,10 +3,10 @@ import LeadsTable from "../components/leads/LeadsTable";
 
 const LeadsPage = () => {
   return (
-    <div>
+    <>
       <CreateLead />
       <LeadsTable />
-    </div>
+    </>
   );
 };
 export default LeadsPage;
