@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
 import { FaAngleDown } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const LeadDetails = () => {
   const [editLead, setEditLead] = useState(false);
