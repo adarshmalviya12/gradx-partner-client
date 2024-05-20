@@ -27,6 +27,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CourseDetails from "./components/courses/CourseDetails.jsx";
 import LeadDetails from "./components/leads/LeadDetails.jsx";
+import AllLeadsTable from "./components/leads/AllLeadsTable.jsx";
+import LeadsFollowUps from "./components/leads/LeadsFollowUps.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +64,9 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="leads" element={<LeadsPage />} />
         <Route path="leads/:id" element={<LeadDetails />} />
+        <Route path="all-leads" element={<AllLeadsTable />} />
+        <Route path="all-leads/:id" element={<LeadsFollowUps />} />
+
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
@@ -85,14 +90,14 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <Suspense fallback={<Loader />}>
-          <ToastContainer transition:Slide autoClose={1000} />
-          <RouterProvider router={router} />
-        </Suspense>
-      </PersistGate>
-    </Provider>
-  </React.StrictMode>,
+  // <React.StrictMode>
+  <Provider store={store}>
+    <PersistGate loading={null} persistor={persistor}>
+      <Suspense fallback={<Loader />}>
+        <ToastContainer transition:Slide autoClose={1000} />
+        <RouterProvider router={router} />
+      </Suspense>
+    </PersistGate>
+  </Provider>,
+  // </React.StrictMode>,
 );

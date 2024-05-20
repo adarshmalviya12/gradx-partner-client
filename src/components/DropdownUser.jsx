@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../features/auth/authActions";
-// import UserOne from "../images/user/user-01.png";
 
 const DropdownUser = () => {
-  const { loading, error, userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();

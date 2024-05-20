@@ -1,16 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { getCurrentUser, userLogin, userLogout } from "./authActions";
 
-const userToken = localStorage.getItem("userToken")
-  ? localStorage.getItem("userToken")
-  : null;
-
 const initialState = {
   isLoading: false,
-  userInfo: null, // for user object
-  userToken, // for storing the JWT
+  userInfo: null,
   error: null,
-  success: false, // for monitoring the registration process.
+  success: false,
 };
 
 const authSlice = createSlice({
@@ -27,7 +22,7 @@ const authSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.userInfo = payload.data.user;
-        state.userToken = payload.data.token;
+        localStorage.setItem("userToken", payload.data.token);
       })
       .addCase(userLogin.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -36,7 +31,6 @@ const authSlice = createSlice({
       .addCase(userLogout, (state) => {
         state.isLoading = false;
         state.userInfo = null;
-        state.userToken = null;
         state.error = null;
         localStorage.removeItem("persist:root");
         localStorage.removeItem("userToken");

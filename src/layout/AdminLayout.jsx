@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import UserSidebar from "../components/UserSidebar";
 import Header from "../components/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentUser } from "../features/auth/authActions";
@@ -15,7 +14,7 @@ const AdminLayout = () => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
-  }, [dispatch]);
+  }, []);
 
   if (isLoading) return <Loader />;
 
