@@ -14,7 +14,7 @@ const UserLayout = () => {
 
   useEffect(() => {
     dispatch(getCurrentUser());
-  }, [dispatch]);
+  }, []);
 
   if (isLoading) return <Loader />;
 

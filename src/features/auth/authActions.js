@@ -42,7 +42,7 @@ export const getCurrentUser = createAsyncThunk(
   "gradx/current-user",
   async (_, { rejectWithValue }) => {
     try {
-      const token = localStorage.getItem("userToken") ?? "";
+      const token = localStorage.getItem("userToken");
       const config = {
         headers: {
           "Content-Type": "application/json",

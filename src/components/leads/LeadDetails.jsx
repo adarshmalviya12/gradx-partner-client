@@ -5,13 +5,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../Loader";
 import { FaAngleDown } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
 
 const LeadDetails = () => {
   const [editLead, setEditLead] = useState(false);
   const [LeadDetails, setLeadDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+
   const [formData, setFormData] = useState({
     firstname: "",
     middlename: "",
@@ -28,7 +27,6 @@ const LeadDetails = () => {
     courseInterest: "",
   });
 
-  const dispatch = useDispatch();
   const { courseList } = useSelector((state) => state.course);
 
   const { id } = useParams();
@@ -106,7 +104,7 @@ const LeadDetails = () => {
         setIsLoading(false);
         setEditLead(false);
       } catch (error) {
-        setError(error.message);
+        console.log(error);
       }
       setIsLoading(false);
     };
