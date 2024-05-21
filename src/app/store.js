@@ -3,6 +3,7 @@ import authReducer from "../features/auth/authSlice";
 import usersReducer from "../features/users/usersSlice";
 import courseReducer from "../features/course/courseSlice";
 import leadReducer from "../features/lead/leadSlice";
+import singleLeadSlice from "../features/lead/singleLeadSlice";
 import followUpsReducer from "../features/followUps/followUpSlice";
 import { persistStore, persistReducer, PERSIST } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   course: courseReducer,
   leads: leadReducer,
+  lead: singleLeadSlice,
   followUps: followUpsReducer,
 });
 

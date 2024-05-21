@@ -56,7 +56,7 @@ const LeadsTable = () => {
                     </h5>
                   </td>
 
-                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                  <td className="border-b border-[#eee] px-1 dark:border-strokedark">
                     <p className="pl-4 text-black dark:text-white">
                       {lead.status}
                     </p>

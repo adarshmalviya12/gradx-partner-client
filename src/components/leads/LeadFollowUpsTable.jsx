@@ -29,6 +29,9 @@ const LeadFollowUpsTable = () => {
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[220px] md:font-medium xl:pl-11">
                 Lead Name
               </th>
+              <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[220px] md:font-medium ">
+                Lead Status
+              </th>
 
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
                 Date
@@ -38,7 +41,7 @@ const LeadFollowUpsTable = () => {
               </th>
 
               <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
-                Details
+                Remarks
               </th>
             </tr>
           </thead>
@@ -50,6 +53,11 @@ const LeadFollowUpsTable = () => {
                   <td className="border-b  border-t  border-stroke px-2 py-2.5 pl-3 dark:border-strokedark xl:pl-11">
                     <h5 className="font-medium text-black dark:text-white">
                       {followUp.lead.firstname} {followUp.lead.lastname}
+                    </h5>
+                  </td>
+                  <td className="border-b  border-t  border-stroke px-2 py-2.5  dark:border-strokedark ">
+                    <h5 className="font-medium text-black dark:text-white">
+                      {followUp.lead.status}
                     </h5>
                   </td>
 
@@ -65,7 +73,7 @@ const LeadFollowUpsTable = () => {
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                     <p className=" text-black dark:text-white">
-                      {followUp.details}
+                      {followUp.remarks}
                     </p>
                   </td>
                 </tr>

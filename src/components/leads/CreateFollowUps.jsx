@@ -11,7 +11,7 @@ const CreateFollowUps = () => {
     leadId: id,
     nextFollowUpDate: "",
     followUpStatus: "",
-    details: "",
+    remarks: "",
   });
 
   const dispatch = useDispatch();
@@ -82,8 +82,8 @@ const CreateFollowUps = () => {
                               not interested
                             </option>
                             <option value="lost">lost</option>
-                            <option value="nrequest submitted">
-                              nrequest submitted
+                            <option value="request submitted">
+                              request submitted
                             </option>
                           </select>
                           <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
@@ -93,14 +93,14 @@ const CreateFollowUps = () => {
                       </div>
                       <div className="w-full xl:w-1/3">
                         <label className="mb-1.5 block text-black dark:text-white">
-                          Details
+                          remarks
                         </label>
                         <input
                           type="text"
-                          name="details"
-                          value={formData.details}
+                          name="remarks"
+                          value={formData.remarks}
                           onChange={handleChange}
-                          placeholder="Enter Details"
+                          placeholder="Enter remarks"
                           className="w-full rounded border-[1.5px] border-stroke bg-transparent px-2 py-1 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                         />
                       </div>
