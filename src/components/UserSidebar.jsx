@@ -56,7 +56,7 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
         <NavLink to="/dashboard">
-          <img src={"/PP Gx B2-1.png"} alt="Logo" className="w-40" />
+          <img src={"mainLogoDark.png"} alt="Logo" className="w-40" />
         </NavLink>
 
         <button
@@ -109,9 +109,10 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   Home
                 </NavLink>
               </li>
+
               <li>
                 <NavLink
-                  to="leads"
+                  to="createLeads"
                   className={({ isActive }) =>
                     `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                       isActive && "bg-graydark dark:bg-meta-4"
@@ -119,7 +120,20 @@ const UserSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }
                 >
                   <MdOutlineDashboard />
-                  Leads
+                  Create Leads
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="myLeads"
+                  className={({ isActive }) =>
+                    `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                      isActive && "bg-graydark dark:bg-meta-4"
+                    }`
+                  }
+                >
+                  <MdOutlineDashboard />
+                  My Leads
                 </NavLink>
               </li>
 

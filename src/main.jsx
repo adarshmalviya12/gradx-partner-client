@@ -9,8 +9,6 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Loader from "./components/Loader.jsx";
-import UserLayout from "./layout/UserLayout.jsx";
-import Home from "./components/Home.jsx";
 import LeadsPage from "./pages/LeadsPage.jsx";
 import CoursesPage from "./pages/CoursesPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
@@ -21,15 +19,14 @@ import { Provider } from "react-redux";
 import { persistor, store } from "./app/store.js";
 import { PersistGate } from "redux-persist/integration/react";
 import AdminLayout from "./layout/AdminLayout.jsx";
-import PartnerLayout from "./layout/PartnerLayout.jsx";
 import ProtectedRoutes from "../src/components/ProtectedRoutes.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CourseDetails from "./components/courses/CourseDetails.jsx";
 import LeadDetails from "./components/leads/LeadDetails.jsx";
-import AllLeadsTable from "./components/leads/AllLeadsTable.jsx";
-import LeadsFollowUps from "./components/leads/LeadsFollowUps.jsx";
 import RequestPage from "./pages/RequestPage.jsx";
+import employeeRoutes from "./routes/employeeRoutes.jsx";
+import partnerRoutes from "./routes/partnerRoutes.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,38 +52,9 @@ const router = createBrowserRouter(
         <Route path="settings" element={<SettingsPage />} />
       </Route>
       // employee
-      <Route
-        path="/employee"
-        element={
-          <ProtectedRoutes role={"employee"}>
-            <UserLayout />
-          </ProtectedRoutes>
-        }
-      >
-        <Route index element={<Home />} />
-        <Route path="leads" element={<LeadsPage />} />
-        <Route path="leads/:id" element={<LeadDetails />} />
-        <Route path="all-leads" element={<AllLeadsTable />} />
-        <Route path="all-leads/:id" element={<LeadsFollowUps />} />
-
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="settings" element={<SettingsPage />} />
-      </Route>
+      {employeeRoutes}
       // Partner
-      <Route
-        path="/partner"
-        element={
-          <ProtectedRoutes role={"partner"}>
-            <PartnerLayout />
-          </ProtectedRoutes>
-        }
-      >
-        <Route index element={<Home />} />
-        <Route path="leads" element={<LeadsPage />} />
-        <Route path="leads/:id" element={<LeadDetails />} />
-        <Route path="profile" element={<ProfilePage />} />
-        <Route path="settings" element={<SettingsPage />} />
-      </Route>
+      {partnerRoutes}
     </>,
   ),
 );

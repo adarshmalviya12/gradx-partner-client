@@ -59,6 +59,7 @@ const leadSlice = createSlice({
       .addCase(createLead.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.leadList.push(payload.data.lead);
+        state.success = true;
       })
       .addCase(createLead.rejected, (state, { payload }) => {
         state.isLoading = false;

@@ -13,24 +13,12 @@ function App() {
                 <img className="dark:hidden" src={"/src/logo/logohalfwhite.png"} alt="Logo" /> */}
               </Link>
 
-              <img
-                className="hidden dark:block  "
-                src={"/src/logo/logofullwhite.png"}
-                alt="Logo"
-              />
-              <img
-                className="dark:hidden"
-                src={"/src/logo/logofullcolor.png"}
-                alt="Logo"
-              />
-
-              {/* <p className="2xl:px-20">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                suspendisse.
-              </p> */}
-
               <span className="mt-15 inline-block">
-                <img src={"/src/logo/UVNLBranding.png"} alt="uvnl branding" />
+                <img
+                  src={"brandingLogoHomePage.png"}
+                  className="w-80"
+                  alt="uvnl branding"
+                />
               </span>
             </div>
           </div>
@@ -39,13 +27,13 @@ function App() {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <Link className="mb-5.5  flex justify-center " to="/">
                 <img
-                  className="hidden w-14 dark:block "
-                  src={"/src/logo/logohalfwhite.png"}
+                  className="hidden w-40 dark:block "
+                  src={"mainLogoDark.png"}
                   alt="Logo"
                 />
                 <img
-                  className="block w-14  dark:hidden  lg:hidden "
-                  src={"/src/logo/logohalfcolor.png"}
+                  className="block w-40  dark:hidden  lg:hidden "
+                  src={"mainLogoLight.png"}
                   alt="Logo"
                 />
               </Link>

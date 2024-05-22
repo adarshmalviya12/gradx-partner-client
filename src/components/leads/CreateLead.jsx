@@ -24,6 +24,7 @@ const CreateLead = () => {
   const dispatch = useDispatch();
 
   const { courseList } = useSelector((state) => state.course);
+  const { success } = useSelector((state) => state.leads);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,21 +33,23 @@ const CreateLead = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createLead(formData));
-    setFormData({
-      firstname: "",
-      middlename: "",
-      lastname: "",
-      email: "",
-      phone: "",
-      dob: "",
-      gender: "",
-      street: "",
-      city: "",
-      state: "",
-      pinCode: "",
-      country: "",
-      courseInterest: "",
-    });
+    if (success) {
+      setFormData({
+        firstname: "",
+        middlename: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        dob: "",
+        gender: "",
+        street: "",
+        city: "",
+        state: "",
+        pinCode: "",
+        country: "",
+        courseInterest: "",
+      });
+    }
   };
 
   useEffect(() => {
@@ -135,7 +138,7 @@ const CreateLead = () => {
             </div>
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
-                Date of Birth <span className="text-meta-1">*</span>
+                Date of Birth
               </label>
               <input
                 type="date"
@@ -151,7 +154,7 @@ const CreateLead = () => {
           <div className="mb-1.5 flex flex-col gap-6 xl:flex-row">
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
-                Gender <span className="text-meta-1">*</span>
+                Gender
               </label>
               <div className="relative z-20 bg-transparent dark:bg-form-input">
                 <select
@@ -203,7 +206,7 @@ const CreateLead = () => {
           <div className="mb-1.5 flex flex-col gap-6 xl:flex-row">
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
-                Street <span className="text-meta-1">*</span>
+                Street
               </label>
               <input
                 type="text"
@@ -229,7 +232,7 @@ const CreateLead = () => {
             </div>
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
-                State <span className="text-meta-1">*</span>
+                State
               </label>
               <input
                 type="text"
@@ -245,7 +248,7 @@ const CreateLead = () => {
           <div className="mb-1.5 flex flex-col gap-6 xl:flex-row">
             <div className="w-full xl:w-1/3">
               <label className="mb-1.5 block text-black dark:text-white">
-                Country <span className="text-meta-1">*</span>
+                Country
               </label>
               <input
                 type="text"
