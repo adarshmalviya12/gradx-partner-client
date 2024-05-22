@@ -24,7 +24,6 @@ const CreateLead = () => {
   const dispatch = useDispatch();
 
   const { courseList } = useSelector((state) => state.course);
-  const { success } = useSelector((state) => state.leads);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -33,23 +32,22 @@ const CreateLead = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createLead(formData));
-    if (success) {
-      setFormData({
-        firstname: "",
-        middlename: "",
-        lastname: "",
-        email: "",
-        phone: "",
-        dob: "",
-        gender: "",
-        street: "",
-        city: "",
-        state: "",
-        pinCode: "",
-        country: "",
-        courseInterest: "",
-      });
-    }
+
+    setFormData({
+      firstname: "",
+      middlename: "",
+      lastname: "",
+      email: "",
+      phone: "",
+      dob: "",
+      gender: "",
+      street: "",
+      city: "",
+      state: "",
+      pinCode: "",
+      country: "",
+      courseInterest: "",
+    });
   };
 
   useEffect(() => {
@@ -163,7 +161,7 @@ const CreateLead = () => {
                   onChange={handleChange}
                   className="relative z-20 w-full appearance-none  rounded border border-stroke bg-transparent px-2 py-1  outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                 >
-                  <option value="">Select</option>
+                  <option>Select</option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                   <option value="other">Other</option>
