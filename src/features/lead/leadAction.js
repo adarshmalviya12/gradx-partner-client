@@ -81,3 +81,31 @@ export const createLead = createAsyncThunk(
     }
   },
 );
+
+export const getSubmittedLeads = createAsyncThunk(
+  "gradx/getSubmittedLeads ",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken") ?? "";
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `${backendURL}/gradx/submitted-Leads`,
+        config,
+      );
+
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);

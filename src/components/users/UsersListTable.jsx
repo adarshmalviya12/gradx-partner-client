@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUsers } from "../../features/users/usersAction";
 import ConfirmationDialog from "../ConfirmationDialog";
+import DeleteModal from "../DeleteModal";
 
 const UsersListTable = () => {
   const dispatch = useDispatch();
@@ -76,7 +77,7 @@ const UsersListTable = () => {
                           <FaEye />
                         </Link>
                         <span>
-                          <ConfirmationDialog
+                          <DeleteModal
                             title={"Are you sure want to delete"}
                             onConfirm={() => handleDelete(user._id)}
                           />

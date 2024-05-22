@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { FaTrashAlt } from "react-icons/fa";
 
-const ConfirmationDialog = ({ title, onConfirm, buttonTitle }) => {
+const DeleteModal = ({ title, onConfirm }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => setIsOpen(true);
@@ -14,15 +15,9 @@ const ConfirmationDialog = ({ title, onConfirm, buttonTitle }) => {
   return (
     <>
       {/* Button to open the modal */}
-
-      <button
-        className=" mb-1 mr-1 rounded bg-primary px-6 py-3 text-sm font-bold uppercase text-white shadow outline-none transition-all duration-150 ease-linear hover:shadow-lg focus:outline-none"
-        type="button"
-        onClick={openModal}
-      >
-        {buttonTitle}
-      </button>
-
+      <div onClick={openModal} className="text-black  dark:text-white">
+        <FaTrashAlt />
+      </div>
       {/* Modal */}
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white  bg-opacity-50 text-black  dark:text-white">
@@ -49,5 +44,4 @@ const ConfirmationDialog = ({ title, onConfirm, buttonTitle }) => {
     </>
   );
 };
-
-export default ConfirmationDialog;
+export default DeleteModal;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCourse, getCourses } from "../../features/course/courseAction";
 import Loader from "../Loader";
 import { Link } from "react-router-dom";
-import ConfirmationDialog from "../ConfirmationDialog";
+import DeleteModal from "../DeleteModal";
 
 const CoursesListTable = () => {
   const dispatch = useDispatch();
@@ -76,7 +76,7 @@ const CoursesListTable = () => {
                           <FaEye />
                         </Link>
                         <span>
-                          <ConfirmationDialog
+                          <DeleteModal
                             title={"Are you sure want to delete"}
                             onConfirm={() => handleDelete(course._id)}
                           />

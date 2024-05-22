@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
-import { getAllLeads, getLeads } from "../../features/lead/leadAction";
+import { getAllLeads } from "../../features/lead/leadAction";
 import { Link } from "react-router-dom";
 
 const AllLeadsTable = () => {

@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import BASE_URL, { convertDob } from "../../constant";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { convertDob } from "../../constant";
 import Loader from "../Loader";
 import { FaAngleDown } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { editLead, getLeadById } from "../../features/lead/singleLeadActions";
+import { getCourses } from "../../features/course/courseAction";
 
 const LeadDetails = () => {
-  const [editLead, setEditLead] = useState(false);
-  const [LeadDetails, setLeadDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const [edit, setEdit] = useState(false);
+  const { lead, isLoading } = useSelector((state) => state.lead);
   const [formData, setFormData] = useState({
     firstname: "",
     middlename: "",
@@ -28,6 +26,8 @@ const LeadDetails = () => {
     courseInterest: "",
   });
 
+  const dispatch = useDispatch();
+
   const { courseList } = useSelector((state) => state.course);
 
   const { id } = useParams();
@@ -38,86 +38,40 @@ const LeadDetails = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    try {
-      const token = localStorage.getItem("userToken") ?? "";
+    dispatch(editLead({ id, formData }));
 
-      const { data } = await axios.patch(
-        `${BASE_URL}/gradx/lead/${id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-
-      setLeadDetails(data.data.updatedLead);
-      toast.success(data.message);
-      setIsLoading(false);
-      setEditLead(false);
-    } catch (error) {
-      if (error.response && error.response.data.message) {
-        toast.error(error.response.data.message);
-        setIsLoading(false);
-      } else {
-        console.error(error.message);
-        setIsLoading(false);
-      }
-    }
+    setEdit(false);
   };
 
   useEffect(() => {
-    const fetchLeadDetails = async () => {
-      setIsLoading(true);
+    dispatch(getCourses());
+    dispatch(getLeadById(id));
+  }, [dispatch, id]);
 
-      try {
-        const token = localStorage.getItem("userToken") ?? "";
-
-        const response = await axios.get(`${BASE_URL}/gradx/lead/${id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        setLeadDetails(response.data.data.lead);
-
-        setFormData({
-          firstname: response.data.data.lead.firstname,
-          middlename: response.data.data.lead.middlename,
-          lastname: response.data.data.lead.lastname,
-          email: response.data.data.lead.email,
-          number: response.data.data.lead.number,
-          gender: response.data.data.lead.gender,
-          dob: response.data.data.lead.dob
-            ? response.data.data.lead.dob.split("T")[0]
-            : "",
-
-          street: response.data.data.lead.address.street,
-          city: response.data.data.lead.address.city,
-          state: response.data.data.lead.address.state,
-          pinCode: response.data.data.lead.address.pinCode,
-          country: response.data.data.lead.address.country,
-          courseInterest: response.data.data.lead.courseInterest._id,
-        });
-        setIsLoading(false);
-        setEditLead(false);
-      } catch (error) {
-        console.log(error);
-      }
-      setIsLoading(false);
-    };
-
-    fetchLeadDetails();
-  }, []);
-
+  useEffect(() => {
+    if (lead) {
+      setFormData({
+        firstname: lead.firstname || "",
+        middlename: lead.middlename || "",
+        lastname: lead.lastname || "",
+        email: lead.email || "",
+        phone: lead.phone || "",
+        dob: lead.dob ? lead.dob.split("T")[0] : "",
+        gender: lead.gender || "",
+        street: lead.address?.street || "",
+        city: lead.address?.city || "",
+        state: lead.address?.state || "",
+        pinCode: lead.address?.pinCode || "",
+        country: lead.address?.country || "",
+        courseInterest: lead.courseInterest?._id || "",
+      });
+    }
+  }, [lead]);
   if (isLoading) return <Loader />;
 
   return (
     <>
-      {!editLead ? (
+      {!edit ? (
         <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
           <div className="border-b border-strokedark px-3.5 py-2 dark:border-stroke">
             <h3 className="font-medium text-black dark:text-white">
@@ -125,47 +79,45 @@ const LeadDetails = () => {
             </h3>
           </div>
           {/* lead details */}
-          {LeadDetails && (
+          {lead && (
             <div className="px-3.5 py-2 text-black dark:text-white">
               <p>
                 <span className="font-semibold">Name: </span>
-                {LeadDetails.firstname} {LeadDetails.middlename}{" "}
-                {LeadDetails.lastname}
+                {lead.firstname} {lead.middlename} {lead.lastname}
               </p>
               <p>
                 <span className="font-semibold">Email: </span>
-                {LeadDetails.email}
+                {lead.email}
               </p>
               <p>
                 <span className="font-semibold">Number: </span>
-                {LeadDetails.phone}
+                {lead.phone}
               </p>
               <p>
                 <span className="font-semibold">Date of birth: </span>
-                {LeadDetails.dob ? convertDob(LeadDetails.dob) : ""}
+                {lead.dob ? convertDob(lead.dob) : ""}
               </p>
               <p>
                 <span className="font-semibold">Course Interested: </span>
-                {LeadDetails.courseInterest.name}
+                {lead.courseInterest.name}
               </p>
               <p>
                 <span className="font-semibold">Status: </span>
-                {LeadDetails.status}
+                {lead.status}
               </p>
 
-              {LeadDetails && (
+              {lead && (
                 <p>
                   <span className="font-semibold">Address: </span>
-                  {LeadDetails.address.street} {LeadDetails.address.city}{" "}
-                  {LeadDetails.address.state} {LeadDetails.address.country}{" "}
-                  {LeadDetails.address.pinCode}
+                  {lead.address.street} {lead.address.city} {lead.address.state}{" "}
+                  {lead.address.country} {lead.address.pinCode}
                 </p>
               )}
             </div>
           )}
           <div className="m-1 flex justify-end gap-2">
             <button
-              onClick={() => setEditLead(true)}
+              onClick={() => setEdit(true)}
               className="inline-flex w-15 items-center justify-center bg-primary px-2 py-1 text-center text-white hover:bg-opacity-90"
             >
               Edit
@@ -401,7 +353,7 @@ const LeadDetails = () => {
                   Save
                 </button>
                 <button
-                  onClick={() => setEditLead(false)}
+                  onClick={() => setEdit(false)}
                   className="flex max-w-132.5 justify-center rounded bg-body p-1.5 font-medium text-gray"
                 >
                   Cancel
