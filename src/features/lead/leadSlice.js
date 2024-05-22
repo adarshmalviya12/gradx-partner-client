@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createLead, getAllLeads, getLeads } from "./leadAction";
+import {
+  createLead,
+  getAllLeads,
+  getLeads,
+  getSubmittedLeads,
+} from "./leadAction";
 
 const initialState = {
   isLoading: false,
@@ -56,6 +61,22 @@ const leadSlice = createSlice({
         state.leadList.push(payload.data.lead);
       })
       .addCase(createLead.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      // get all leads
+
+      .addCase(getSubmittedLeads.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+
+      .addCase(getSubmittedLeads.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.leadList = payload.data.submittedLeads;
+      })
+      .addCase(getSubmittedLeads.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

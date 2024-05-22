@@ -2,16 +2,16 @@ import { useEffect } from "react";
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
-import { getAllLeads } from "../../features/lead/leadAction";
+import { getAllLeads, getSubmittedLeads } from "../../features/lead/leadAction";
 import { Link } from "react-router-dom";
 
-const AllLeadsTable = () => {
+const SubmittedLeads = () => {
   const dispatch = useDispatch();
 
   const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getAllLeads());
+    dispatch(getSubmittedLeads());
   }, []);
 
   if (isLoading) {
@@ -36,6 +36,9 @@ const AllLeadsTable = () => {
                 Status
               </th>
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
+                Course Interested
+              </th>
+              <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
                 Referred By
               </th>
 
@@ -55,13 +58,16 @@ const AllLeadsTable = () => {
                   </td>
 
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                    <p className="pl-4 text-black dark:text-white">
-                      {lead.status}
+                    <p className=" text-black dark:text-white">{lead.status}</p>
+                  </td>
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <p className=" text-black dark:text-white">
+                      {lead.courseInterest.name}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                    <p className="pl-4 text-black dark:text-white">
-                      {lead.referredBy.firstname}
+                    <p className=" text-black dark:text-white">
+                      {lead.referredBy.firstname} {lead.referredBy.lastname}
                     </p>
                   </td>
 
@@ -82,4 +88,4 @@ const AllLeadsTable = () => {
     </div>
   );
 };
-export default AllLeadsTable;
+export default SubmittedLeads;

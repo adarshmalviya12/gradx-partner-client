@@ -29,6 +29,7 @@ import CourseDetails from "./components/courses/CourseDetails.jsx";
 import LeadDetails from "./components/leads/LeadDetails.jsx";
 import AllLeadsTable from "./components/leads/AllLeadsTable.jsx";
 import LeadsFollowUps from "./components/leads/LeadsFollowUps.jsx";
+import RequestPage from "./pages/RequestPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +50,7 @@ const router = createBrowserRouter(
         <Route path="courses/:id" element={<CourseDetails />} />
         <Route path="leads" element={<LeadsPage />} />
         <Route path="leads/:id" element={<LeadDetails />} />
+        <Route path="requests" element={<RequestPage />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
