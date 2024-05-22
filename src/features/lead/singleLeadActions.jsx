@@ -48,7 +48,7 @@ export const editLead = createAsyncThunk(
   },
 );
 
-export const submitLead = createAsyncThunk(
+export const convertLead = createAsyncThunk(
   "gradx/submitLead",
   async (id, { rejectWithValue }) => {
     try {
@@ -60,7 +60,7 @@ export const submitLead = createAsyncThunk(
         },
       };
       const { data } = await axios.patch(
-        `${BASE_URL}/gradx/submit-lead/${id}`,
+        `${BASE_URL}/gradx/convert-lead/${id}`,
         {},
         config,
       );

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editLead, getLeadById, submitLead } from "./singleLeadActions";
+import { convertLead, editLead, getLeadById } from "./singleLeadActions";
 
 const initialState = {
   isLoading: false,
@@ -42,15 +42,15 @@ const singleLeadSlice = createSlice({
       })
       // Submit Lead
 
-      .addCase(submitLead.pending, (state) => {
+      .addCase(convertLead.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(submitLead.fulfilled, (state, { payload }) => {
+      .addCase(convertLead.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.lead = payload.data.lead;
       })
-      .addCase(submitLead.rejected, (state, { payload }) => {
+      .addCase(convertLead.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

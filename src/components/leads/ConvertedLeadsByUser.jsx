@@ -1,17 +1,20 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Loader";
-import { getAllConvertedLeads } from "../../features/lead/leadAction";
-import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import {
+  getAllConvertedLeads,
+  getConvertedLeads,
+} from "../../features/lead/leadAction";
+import Loader from "../Loader";
+import { useEffect } from "react";
 
-const ConvertedLeads = () => {
+const ConvertedLeadsByUser = () => {
   const dispatch = useDispatch();
 
   const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getAllConvertedLeads());
+    dispatch(getConvertedLeads());
   }, []);
 
   if (isLoading) {
@@ -88,4 +91,4 @@ const ConvertedLeads = () => {
     </div>
   );
 };
-export default ConvertedLeads;
+export default ConvertedLeadsByUser;
