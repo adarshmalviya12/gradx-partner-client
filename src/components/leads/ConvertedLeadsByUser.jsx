@@ -1,17 +1,20 @@
-import { useEffect } from "react";
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import Loader from "../Loader";
-import { getAllLeads } from "../../features/lead/leadAction";
 import { Link } from "react-router-dom";
+import {
+  getAllConvertedLeads,
+  getConvertedLeads,
+} from "../../features/lead/leadAction";
+import Loader from "../Loader";
+import { useEffect } from "react";
 
-const AllLeadsTable = () => {
+const ConvertedLeadsByUser = () => {
   const dispatch = useDispatch();
 
   const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getAllLeads());
+    dispatch(getConvertedLeads());
   }, []);
 
   if (isLoading) {
@@ -36,10 +39,10 @@ const AllLeadsTable = () => {
                 Status
               </th>
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
-                Referred By
+                Course Interested
               </th>
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
-                Role
+                Referred By
               </th>
 
               <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
@@ -58,18 +61,16 @@ const AllLeadsTable = () => {
                   </td>
 
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                    <p className="pl-4 text-black dark:text-white">
-                      {lead.status}
-                    </p>
+                    <p className=" text-black dark:text-white">{lead.status}</p>
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                    <p className="pl-4 text-black dark:text-white">
-                      {lead.referredBy.firstname} {lead.referredBy.lastname}
+                    <p className=" text-black dark:text-white">
+                      {lead.courseInterest.name}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                     <p className=" text-black dark:text-white">
-                      {lead.referredBy.role}
+                      {lead.referredBy.firstname} {lead.referredBy.lastname}
                     </p>
                   </td>
 
@@ -90,4 +91,4 @@ const AllLeadsTable = () => {
     </div>
   );
 };
-export default AllLeadsTable;
+export default ConvertedLeadsByUser;

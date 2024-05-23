@@ -7,6 +7,8 @@ import ProfilePage from "../pages/ProfilePage";
 import SettingsPage from "../pages/SettingsPage";
 import CreateLead from "../components/leads/CreateLead";
 import LeadsTable from "../components/leads/LeadsTable";
+import ConvertedLeads from "../components/leads/ConvertedLeads";
+import ConvertedLeadsByUser from "../components/leads/ConvertedLeadsByUser";
 
 const partnerRoutes = (
   <Route
@@ -21,7 +23,7 @@ const partnerRoutes = (
     <Route path="createLeads" element={<CreateLead />} />
     <Route path="myLeads" element={<LeadsTable />} />
     <Route path="myLeads/:id" element={<LeadDetails />} />
-
+    <Route path="convertedLeads" element={<ConvertedLeadsByUser />} />
     <Route path="profile" element={<ProfilePage />} />
     <Route path="settings" element={<SettingsPage />} />
   </Route>

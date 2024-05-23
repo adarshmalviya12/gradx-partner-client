@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createLead,
+  getAllConvertedLeads,
   getAllLeads,
+  getConvertedLeads,
   getLeads,
-  getSubmittedLeads,
 } from "./leadAction";
 
 const initialState = {
@@ -66,18 +67,18 @@ const leadSlice = createSlice({
         state.error = payload;
       })
 
-      // get all leads
+      // get converted leads by user
 
-      .addCase(getSubmittedLeads.pending, (state) => {
+      .addCase(getConvertedLeads.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
 
-      .addCase(getSubmittedLeads.fulfilled, (state, { payload }) => {
+      .addCase(getConvertedLeads.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.leadList = payload.data.submittedLeads;
+        state.leadList = payload.data.convertedLeads;
       })
-      .addCase(getSubmittedLeads.rejected, (state, { payload }) => {
+      .addCase(getConvertedLeads.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });

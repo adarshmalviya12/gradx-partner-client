@@ -4,7 +4,7 @@ import CreateFollowUps from "./CreateFollowUps";
 import LeadDetail from "./LeadDetail";
 import LeadFollowUpsTable from "./LeadFollowUpsTable";
 import { useDispatch, useSelector } from "react-redux";
-import { submitLead } from "../../features/lead/singleLeadActions";
+import { convertLead } from "../../features/lead/singleLeadActions";
 
 const LeadsFollowUps = () => {
   const { id } = useParams();
@@ -12,16 +12,16 @@ const LeadsFollowUps = () => {
 
   const { lead } = useSelector((state) => state.lead);
   const submitRequest = () => {
-    dispatch(submitLead(id));
+    dispatch(convertLead(id));
   };
 
   return (
     <>
       <div className="flex justify-end">
-        {lead?.status && lead?.status !== "submitted" ? (
+        {lead?.status && lead?.status !== "converted" ? (
           <ConfirmationDialog
-            title={"do you want send admission request"}
-            buttonTitle={"submit"}
+            title={"do you want convert"}
+            buttonTitle={"convert"}
             onConfirm={submitRequest}
           />
         ) : (
@@ -30,7 +30,7 @@ const LeadsFollowUps = () => {
             type="button"
             disabled
           >
-            submitted
+            converted
           </button>
         )}
 
