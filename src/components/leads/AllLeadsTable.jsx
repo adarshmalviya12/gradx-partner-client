@@ -64,7 +64,7 @@ const AllLeadsTable = () => {
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
                     <p className="pl-4 text-black dark:text-white">
-                      {lead.referredBy.firstname}
+                      {lead.referredBy.firstname} {lead.referredBy.lastname}
                     </p>
                   </td>
                   <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">

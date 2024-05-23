@@ -56,7 +56,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
         <NavLink to="/">
-          <img src={"/PP Gx B2-1.png"} alt="Logo" className="w-40" />
+          <img src={"mainLogoDark.png"} alt="Logo" className="w-40" />
         </NavLink>
 
         <button
@@ -85,7 +85,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
 
       <div className="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear">
         {/* <!-- Sidebar Menu --> */}
-        <nav className="mt-3 px-4 py-4 lg:mt-4 lg:px-6">
+        <nav className="mt-3 px-4 py-4 lg:mt-2 lg:px-6">
           {/* <!-- Menu Group --> */}
           <div>
             <h3 className="mb-4 ml-4 text-sm font-semibold text-bodydark2">
@@ -151,7 +151,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </li>
               <li>
                 <NavLink
-                  to="requests"
+                  to="submitted"
                   className={({ isActive }) =>
                     `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                       isActive && "bg-graydark dark:bg-meta-4"
@@ -159,7 +159,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }
                 >
                   <MdOutlineDashboard />
-                  Requests
+                  Submitted Leads
                 </NavLink>
               </li>
 

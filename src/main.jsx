@@ -27,6 +27,7 @@ import LeadDetails from "./components/leads/LeadDetails.jsx";
 import RequestPage from "./pages/RequestPage.jsx";
 import employeeRoutes from "./routes/employeeRoutes.jsx";
 import partnerRoutes from "./routes/partnerRoutes.jsx";
+import Home from "./components/Home.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -41,6 +42,7 @@ const router = createBrowserRouter(
           </ProtectedRoutes>
         }
       >
+        <Route index element={<Home />} />
         <Route path="users" element={<UsersPage />} />
         <Route path="users/:id" element={<UserDetails />} />
         <Route path="courses" element={<CoursesPage />} />
