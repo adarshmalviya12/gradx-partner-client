@@ -28,6 +28,7 @@ import RequestPage from "./pages/RequestPage.jsx";
 import employeeRoutes from "./routes/employeeRoutes.jsx";
 import partnerRoutes from "./routes/partnerRoutes.jsx";
 import Home from "./components/Home.jsx";
+import ConvertedLeads from "./components/leads/ConvertedLeads.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,7 +50,7 @@ const router = createBrowserRouter(
         <Route path="courses/:id" element={<CourseDetails />} />
         <Route path="leads" element={<LeadsPage />} />
         <Route path="leads/:id" element={<LeadDetails />} />
-        <Route path="requests" element={<RequestPage />} />
+        <Route path="converted" element={<ConvertedLeads />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>

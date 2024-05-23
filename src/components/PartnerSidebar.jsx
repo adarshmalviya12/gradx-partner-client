@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
+import mainLogoDark from "../assets/logos/mainLogoDark.png";
 
 const PartnerSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const trigger = useRef(null);
@@ -56,7 +57,7 @@ const PartnerSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
         <NavLink to="/dashboard">
-          <img src={"mainLogoDark.png"} alt="Logo" className="w-40" />
+          <img src={mainLogoDark} alt="Logo" className="w-40" />
         </NavLink>
 
         <button
