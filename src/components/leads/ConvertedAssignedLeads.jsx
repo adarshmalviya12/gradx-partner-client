@@ -1,27 +1,22 @@
 import { useEffect } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
-import { getLeads } from "../../features/lead/leadAction";
+import { getConvertedLeadsAssignedToEmployee } from "../../features/lead/leadAction";
 import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
-const LeadsTable = () => {
+const ConvertedAssignedLeads = () => {
   const dispatch = useDispatch();
 
-  const { isLoading, leadList, error } = useSelector((state) => state.leads);
+  const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getLeads());
+    dispatch(getConvertedLeadsAssignedToEmployee());
   }, []);
-
-  if (error) {
-    console.log(error);
-  }
 
   if (isLoading) {
     return <Loader />;
   }
-
   return (
     <div className="rounded-sm border border-stroke bg-white px-2 pb-1.5 pt-1 shadow-default dark:border-strokedark dark:bg-boxdark ">
       <div className="px-1 py-1.5 md:px-1.5 xl:px-2.5">
@@ -40,6 +35,12 @@ const LeadsTable = () => {
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
                 Status
               </th>
+              <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
+                Course Interested
+              </th>
+              <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
+                Referred By
+              </th>
 
               <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
                 Actions
@@ -47,7 +48,6 @@ const LeadsTable = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            {leadList && leadList.length === 0 ? <h1>No leads </h1> : null}
             {leadList &&
               leadList.map((lead) => (
                 <tr key={lead._id}>
@@ -57,9 +57,17 @@ const LeadsTable = () => {
                     </h5>
                   </td>
 
-                  <td className="border-b border-[#eee] px-1 dark:border-strokedark">
-                    <p className="pl-4 text-black dark:text-white">
-                      {lead.status}
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <p className=" text-black dark:text-white">{lead.status}</p>
+                  </td>
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <p className=" text-black dark:text-white">
+                      {lead.courseInterest.name}
+                    </p>
+                  </td>
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <p className=" text-black dark:text-white">
+                      {lead.referredBy.firstname} {lead.referredBy.lastname}
                     </p>
                   </td>
 
@@ -80,4 +88,4 @@ const LeadsTable = () => {
     </div>
   );
 };
-export default LeadsTable;
+export default ConvertedAssignedLeads;

@@ -124,7 +124,30 @@ const leadSlice = createSlice({
       .addCase(getAllConvertedLeads.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-      });
+      })
+
+      // get converted leads by user
+
+      .addCase(getConvertedLeadsAssignedToEmployee.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+
+      .addCase(
+        getConvertedLeadsAssignedToEmployee.fulfilled,
+        (state, { payload }) => {
+          state.isLoading = false;
+          console.log(payload.data);
+          state.leadList = payload.data.leads;
+        },
+      )
+      .addCase(
+        getConvertedLeadsAssignedToEmployee.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        },
+      );
   },
 });
 

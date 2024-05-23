@@ -44,6 +44,9 @@ const ConvertedLeadsByUser = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
+            {leadList && leadList.length === 0 ? (
+              <h1>No leads converted </h1>
+            ) : null}
             {leadList &&
               leadList.map((lead) => (
                 <tr key={lead._id}>
