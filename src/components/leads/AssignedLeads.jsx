@@ -1,20 +1,17 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
-import {
-  getAllConvertedLeads,
-  getConvertedLeadsAssignedToEmployee,
-} from "../../features/lead/leadAction";
+import { getAssignedLeads } from "../../features/lead/leadAction";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
-const ConvertedLeads = () => {
+const AssignedLeads = () => {
   const dispatch = useDispatch();
 
   const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getAllConvertedLeads());
+    dispatch(getAssignedLeads());
   }, []);
 
   if (isLoading) {
@@ -91,4 +88,4 @@ const ConvertedLeads = () => {
     </div>
   );
 };
-export default ConvertedLeads;
+export default AssignedLeads;

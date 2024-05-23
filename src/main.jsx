@@ -29,6 +29,7 @@ import employeeRoutes from "./routes/employeeRoutes.jsx";
 import partnerRoutes from "./routes/partnerRoutes.jsx";
 import Home from "./components/Home.jsx";
 import ConvertedLeads from "./components/leads/ConvertedLeads.jsx";
+import AssignedLeads from "./components/leads/AssignedLeads.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

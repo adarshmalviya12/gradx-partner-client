@@ -1,10 +1,7 @@
 import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  getAllConvertedLeads,
-  getConvertedLeads,
-} from "../../features/lead/leadAction";
+import { getLeadsConvertedByLoggedInUser } from "../../features/lead/leadAction";
 import Loader from "../Loader";
 import { useEffect } from "react";
 
@@ -14,7 +11,7 @@ const ConvertedLeadsByUser = () => {
   const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getConvertedLeads());
+    dispatch(getLeadsConvertedByLoggedInUser());
   }, []);
 
   if (isLoading) {
@@ -44,10 +41,6 @@ const ConvertedLeadsByUser = () => {
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
                 Referred By
               </th>
-
-              <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
-                Actions
-              </th>
             </tr>
           </thead>
           <tbody className="text-sm">
@@ -72,16 +65,6 @@ const ConvertedLeadsByUser = () => {
                     <p className=" text-black dark:text-white">
                       {lead.referredBy.firstname} {lead.referredBy.lastname}
                     </p>
-                  </td>
-
-                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
-                    <div className="flex items-center space-x-3.5">
-                      <div className="flex justify-center gap-2 pl-4">
-                        <Link to={`${lead._id}`}>
-                          <FaEye />
-                        </Link>
-                      </div>
-                    </div>
                   </td>
                 </tr>
               ))}
