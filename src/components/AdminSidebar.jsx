@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MdOutlineDashboard } from "react-icons/md";
+import mainLogoDark from "../assets/logos/mainLogoDark.png";
 
 const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const trigger = useRef(null);
@@ -56,7 +57,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* <!-- SIDEBAR HEADER --> */}
       <div className="flex items-center justify-between gap-2 px-4 py-5.5 lg:py-6.5">
         <NavLink to="/">
-          <img src={"mainLogoDark.png"} alt="Logo" className="w-40" />
+          <img src={mainLogoDark} alt="Logo" className="w-40" />
         </NavLink>
 
         <button
@@ -151,7 +152,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
               </li>
               <li>
                 <NavLink
-                  to="submitted"
+                  to="converted"
                   className={({ isActive }) =>
                     `group relative flex items-center gap-2.5 rounded-sm px-4 py-2 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                       isActive && "bg-graydark dark:bg-meta-4"
@@ -159,7 +160,7 @@ const AdminSidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   }
                 >
                   <MdOutlineDashboard />
-                  Submitted Leads
+                  Converted Leads
                 </NavLink>
               </li>
 

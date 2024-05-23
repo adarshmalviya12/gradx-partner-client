@@ -76,9 +76,27 @@ const leadSlice = createSlice({
 
       .addCase(getConvertedLeads.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        console.log(payload.data);
         state.leadList = payload.data.convertedLeads;
       })
       .addCase(getConvertedLeads.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      // get converted leads by user
+
+      .addCase(getAllConvertedLeads.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+
+      .addCase(getAllConvertedLeads.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        console.log(payload.data);
+        state.leadList = payload.data.convertedLeads;
+      })
+      .addCase(getAllConvertedLeads.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       });
