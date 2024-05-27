@@ -10,10 +10,10 @@ import SettingsPage from "../pages/SettingsPage";
 import LeadsTable from "../components/leads/LeadsTable";
 import CreateLead from "../components/leads/CreateLead";
 import EmployeeLayout from "../layout/EmployeeLayout";
-import ConvertedLeads from "../components/leads/ConvertedLeads";
 import AssignedLeads from "../components/leads/AssignedLeads";
 import ConvertedAssignedLeads from "../components/leads/ConvertedAssignedLeads";
 import ConvertedLeadsByUser from "../components/leads/ConvertedLeadsByUser";
+import EmployeeProfile from "../pages/EmployeeProfile";
 
 const employeeRoutes = (
   <Route
@@ -34,7 +34,7 @@ const employeeRoutes = (
     <Route path="assigned/:id" element={<LeadsFollowUps />} />
     <Route path="all-leads" element={<AllLeadsTable />} />
     <Route path="all-leads/:id" element={<LeadsFollowUps />} />
-    <Route path="profile" element={<ProfilePage />} />
+    <Route path="profile" element={<EmployeeProfile />} />
     <Route path="settings" element={<SettingsPage />} />
   </Route>
 );

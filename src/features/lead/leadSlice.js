@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createLead,
+  createLeadWithReferral,
   getAllConvertedLeads,
   getAllLeads,
   getAssignedLeads,
@@ -69,6 +70,22 @@ const leadSlice = createSlice({
         state.error = payload;
       })
 
+      // create lead
+
+      .addCase(createLeadWithReferral.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(createLeadWithReferral.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.leadList.push(payload.data.lead);
+        state.success = true;
+      })
+      .addCase(createLeadWithReferral.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
       // get assigned Leads leads by user
 
       .addCase(getAssignedLeads.pending, (state) => {
@@ -126,7 +143,7 @@ const leadSlice = createSlice({
         state.error = payload;
       })
 
-      // get converted leads by user
+      // get converted leads by assigned Employee
 
       .addCase(getConvertedLeadsAssignedToEmployee.pending, (state) => {
         state.isLoading = true;

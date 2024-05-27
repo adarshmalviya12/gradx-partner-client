@@ -82,6 +82,35 @@ export const createLead = createAsyncThunk(
   },
 );
 
+export const createLeadWithReferral = createAsyncThunk(
+  "gradx/createLeadWithReferral",
+  async ({ id, formData }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken") ?? "";
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios.post(
+        `${backendURL}/gradx/refer/${id}`,
+        formData,
+        config,
+      );
+      if (data.message) toast.success(data.message);
+      return data;
+    } catch (error) {
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  },
+);
+
 export const getAssignedLeads = createAsyncThunk(
   "gradx/getAssignedLeads ",
   async (_, { rejectWithValue }) => {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { FaEdit, FaEye } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
 import { getLeads } from "../../features/lead/leadAction";
@@ -47,7 +47,11 @@ const LeadsTable = () => {
             </tr>
           </thead>
           <tbody className="text-sm">
-            {leadList && leadList.length === 0 ? <h1>No leads </h1> : null}
+            {leadList && leadList.length === 0 ? (
+              <tr>
+                <td>No leads</td>
+              </tr>
+            ) : null}
             {leadList &&
               leadList.map((lead) => (
                 <tr key={lead._id}>
