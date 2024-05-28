@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   createLead,
+  createLeadWithReferral,
   getAllConvertedLeads,
   getAllLeads,
-  getConvertedLeads,
+  getAssignedLeads,
+  getConvertedLeadsAssignedToEmployee,
   getLeads,
+  getLeadsConvertedByLoggedInUser,
 } from "./leadAction";
 
 const initialState = {
@@ -67,22 +70,61 @@ const leadSlice = createSlice({
         state.error = payload;
       })
 
-      // get converted leads by user
+      // create lead
 
-      .addCase(getConvertedLeads.pending, (state) => {
+      .addCase(createLeadWithReferral.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(createLeadWithReferral.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.leadList.push(payload.data.lead);
+        state.success = true;
+      })
+      .addCase(createLeadWithReferral.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.error = payload;
+      })
+
+      // get assigned Leads leads by user
+
+      .addCase(getAssignedLeads.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
 
-      .addCase(getConvertedLeads.fulfilled, (state, { payload }) => {
+      .addCase(getAssignedLeads.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         console.log(payload.data);
-        state.leadList = payload.data.convertedLeads;
+        state.leadList = payload.data.leads;
       })
-      .addCase(getConvertedLeads.rejected, (state, { payload }) => {
+      .addCase(getAssignedLeads.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
       })
+
+      // get converted leads by user
+
+      .addCase(getLeadsConvertedByLoggedInUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+
+      .addCase(
+        getLeadsConvertedByLoggedInUser.fulfilled,
+        (state, { payload }) => {
+          state.isLoading = false;
+          console.log(payload.data);
+          state.leadList = payload.data.leads;
+        },
+      )
+      .addCase(
+        getLeadsConvertedByLoggedInUser.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        },
+      )
 
       // get converted leads by user
 
@@ -99,7 +141,30 @@ const leadSlice = createSlice({
       .addCase(getAllConvertedLeads.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
-      });
+      })
+
+      // get converted leads by assigned Employee
+
+      .addCase(getConvertedLeadsAssignedToEmployee.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+
+      .addCase(
+        getConvertedLeadsAssignedToEmployee.fulfilled,
+        (state, { payload }) => {
+          state.isLoading = false;
+          console.log(payload.data);
+          state.leadList = payload.data.leads;
+        },
+      )
+      .addCase(
+        getConvertedLeadsAssignedToEmployee.rejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload;
+        },
+      );
   },
 });
 

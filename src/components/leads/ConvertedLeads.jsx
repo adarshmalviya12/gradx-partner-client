@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
-import { getAllConvertedLeads } from "../../features/lead/leadAction";
+import {
+  getAllConvertedLeads,
+  getConvertedLeadsAssignedToEmployee,
+} from "../../features/lead/leadAction";
 import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 

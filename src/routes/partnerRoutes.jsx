@@ -1,14 +1,13 @@
 import { Route } from "react-router-dom";
 import ProtectedRoutes from "../components/ProtectedRoutes";
 import PartnerLayout from "../layout/PartnerLayout";
-import Home from "../components/Home";
 import LeadDetails from "../components/leads/LeadDetails";
-import ProfilePage from "../pages/ProfilePage";
 import SettingsPage from "../pages/SettingsPage";
 import CreateLead from "../components/leads/CreateLead";
 import LeadsTable from "../components/leads/LeadsTable";
-import ConvertedLeads from "../components/leads/ConvertedLeads";
 import ConvertedLeadsByUser from "../components/leads/ConvertedLeadsByUser";
+import PartnerProfile from "../pages/PartnerProfile";
+import Home from "../components/partner/Home";
 
 const partnerRoutes = (
   <Route
@@ -24,7 +23,7 @@ const partnerRoutes = (
     <Route path="myLeads" element={<LeadsTable />} />
     <Route path="myLeads/:id" element={<LeadDetails />} />
     <Route path="convertedLeads" element={<ConvertedLeadsByUser />} />
-    <Route path="profile" element={<ProfilePage />} />
+    <Route path="profile" element={<PartnerProfile />} />
     <Route path="settings" element={<SettingsPage />} />
   </Route>
 );

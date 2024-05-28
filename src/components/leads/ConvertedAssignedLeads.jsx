@@ -1,17 +1,17 @@
-import { FaEye } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getLeadsConvertedByLoggedInUser } from "../../features/lead/leadAction";
-import Loader from "../Loader";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Loader from "../Loader";
+import { getConvertedLeadsAssignedToEmployee } from "../../features/lead/leadAction";
+import { Link } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
-const ConvertedLeadsByUser = () => {
+const ConvertedAssignedLeads = () => {
   const dispatch = useDispatch();
 
   const { isLoading, leadList } = useSelector((state) => state.leads);
 
   useEffect(() => {
-    dispatch(getLeadsConvertedByLoggedInUser());
+    dispatch(getConvertedLeadsAssignedToEmployee());
   }, []);
 
   if (isLoading) {
@@ -41,12 +41,13 @@ const ConvertedLeadsByUser = () => {
               <th className="min-w-25 px-2 py-2 font-normal text-black dark:text-white md:min-w-[150px] md:font-medium">
                 Referred By
               </th>
+
+              <th className=" min-w-15 px-2 py-2 font-normal text-black dark:text-white md:font-medium">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="text-sm">
-            {leadList && leadList.length === 0 ? (
-              <h1>No leads converted </h1>
-            ) : null}
             {leadList &&
               leadList.map((lead) => (
                 <tr key={lead._id}>
@@ -69,6 +70,16 @@ const ConvertedLeadsByUser = () => {
                       {lead.referredBy.firstname} {lead.referredBy.lastname}
                     </p>
                   </td>
+
+                  <td className="border-b border-[#eee] px-1 py-1.5 dark:border-strokedark">
+                    <div className="flex items-center space-x-3.5">
+                      <div className="flex justify-center gap-2 pl-4">
+                        <Link to={`${lead._id}`}>
+                          <FaEye />
+                        </Link>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -77,4 +88,4 @@ const ConvertedLeadsByUser = () => {
     </div>
   );
 };
-export default ConvertedLeadsByUser;
+export default ConvertedAssignedLeads;
