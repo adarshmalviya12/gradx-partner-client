@@ -1,8 +1,7 @@
-import React from "react";
 import { FaCopy } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
-const PartnerProfile = () => {
+const Home = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   const referralLink = `www.${location.hostname}:${location.port}/refer/${userInfo?.uniqueUserId}`;
@@ -12,10 +11,14 @@ const PartnerProfile = () => {
   };
 
   return (
-    <div>
-      <div className="border-3 flex items-center justify-between border-stroke bg-white px-6.5 py-4 font-bold dark:border-strokedark dark:bg-black">
+    <div className="text-center">
+      <h1 className="text-xl font-semibold text-black dark:text-white">
+        Welcome! You Have logged in Successfully
+      </h1>
+      <div className="border-3 mt-5 flex items-center justify-between border-stroke bg-white px-4.5 py-2  dark:border-strokedark dark:bg-black">
         <p>
-          Refer students : <span className=""> {referralLink} </span>
+          <span className="font-bold">Refer students </span>-
+          <span className=""> {referralLink} </span>
         </p>
 
         <span
@@ -29,5 +32,4 @@ const PartnerProfile = () => {
     </div>
   );
 };
-
-export default PartnerProfile;
+export default Home;
