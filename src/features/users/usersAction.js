@@ -3,12 +3,12 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const backendURL = import.meta.env.VITE_BASE_URL;
-const token = localStorage.getItem("userToken") ?? "";
 
 export const getUsers = createAsyncThunk(
   "gradx/users",
   async (_, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem("userToken") ?? "";
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -33,6 +33,7 @@ export const createUser = createAsyncThunk(
   "gradx/create-user",
   async (formData, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem("userToken") ?? "";
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -62,6 +63,7 @@ export const updateUser = createAsyncThunk(
   "gradx/update-user",
   async ({ id, formData }, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem("userToken") ?? "";
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -91,6 +93,7 @@ export const deleteUser = createAsyncThunk(
   "gradx/user",
   async (id, { rejectWithValue }) => {
     try {
+      const token = localStorage.getItem("userToken") ?? "";
       const config = {
         headers: {
           "Content-Type": "application/json",
